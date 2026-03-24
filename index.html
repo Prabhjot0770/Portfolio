@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prabhjot Singh - Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #3498db;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        #hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.2s forwards;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.4s forwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #ff6b6b;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        }
+
+        section {
+            width: 100%;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+
+        /* Backgrounds */
+        #about,
+        #education {
+            background: #f8f9fa;
+        }
+
+        #projects,
+        #certifications {
+            background: white;
+        }
+
+        /* Skills Grid */
+        .skills-title {
+            text-align: center;
+            font-size: 2rem;
+            margin: 2rem 0;
+            color: #2c3e50;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .skill-category h4 {
+            color: #3498db;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill-tag {
+            padding: 0.5rem 1rem;
+            background: #21638e;
+            color: white;
+            border-radius: 25px;
+            font-size: 0.9rem;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-image {
+            height: 180px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-content h3 {
+            margin-bottom: 0.3rem;
+            color: #2c3e50;
+        }
+
+        .project-date {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+        }
+
+        .project-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.2rem;
+            color: #555;
+            flex: 1;
+            font-size: 0.95rem;
+        }
+
+        .project-tech {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .tech-tag {
+            padding: 0.3rem 0.8rem;
+            background: #ecf0f1;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: #7f8c8d;
+        }
+
+        /* Education */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: #3498db;
+            top: 0;
+            bottom: 0;
+            left: 20px;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            padding: 20px 0 20px 60px;
+            position: relative;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff6b6b;
+            border: 4px solid white;
+            border-radius: 50%;
+            left: 10px;
+            top: 25px;
+            z-index: 1;
+            box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.2);
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .timeline-content h3 {
+            color: #2c3e50;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-content h4 {
+            color: #3498db;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-date {
+            display: inline-block;
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+            background: #ecf0f1;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+        }
+
+        .timeline-content p,
+        .timeline-content ul {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .timeline-content ul {
+            padding-left: 1.2rem;
+        }
+
+        /* Certifications */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-card {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: 0.3s;
+            border: 1px solid #eee;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: #3498db;
+        }
+
+        .cert-icon {
+            font-size: 2.5rem;
+            color: #3498db;
+        }
+
+        .cert-info h3 {
+            font-size: 1.1rem;
+            color: #2c3e50;
+            margin-bottom: 0.3rem;
+        }
+
+        .cert-info p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .cert-date {
+            font-size: 0.8rem;
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        #contact .section-title {
+            color: white;
+        }
+
+        .contact-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: white;
+            text-decoration: none;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .contact-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(10px);
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            color: #333;
+        }
+
+        .contact-form h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: 0.3s;
+            background: #f8f9fa;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            background: white;
+        }
+
+        .contact-form button {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .contact-form button:hover {
+            background: #fa5252;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .contact-wrap {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                left: 0;
+                top: 100%;
+                flex-direction: column;
+                background-color: rgba(255, 255, 255, 0.98);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 0;
+                max-height: 0;
+                overflow: hidden;
+            }
+
+            .nav-links.active {
+                max-height: 400px;
+                padding: 1rem 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .container {
+                padding: 4rem 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="#hero" class="logo">Prabhjot Singh</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hero">
+        <div class="hero-content">
+            <img src="WhatsApp Image 2026-03-25 at 00.00.51.jpeg" alt=""
+                style="width: 200px; height: 200px; border-radius: 80%; object-fit: cover; margin-bottom: 1rem; border: 4px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
+            <h1>Hi, I'm <span style="color: #ff6b6b;">Prabhjot Singh</span></h1>
+            <p style="font-size: 20px;">Data Analyst & Developer</p><br>
+            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                <a href="#projects" class="cta-button">View My Work</a>
+                <a href="13663_prabh_CV.pdf" target="_blank" class="cta-button">Download Resume</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+
+            <div class="about-content" style="max-width: 1000px; text-align: left; margin: 0 auto;">
+                <div style="display: flex; flex-wrap: wrap; gap: 24px; width: 100%;">
+
+                    <!-- Left Column -->
+                    <div style="flex: 1 1 300px; display: flex; flex-direction: column; gap: 24px;">
+
+                        <!-- Quick Facts Card -->
+                        <div
+                            style="background-color: white; border-radius: 10px; padding: 24px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                            <h2 style="font-size: 1.2rem; font-weight: 700; margin: 0 0 24px 0; color: #2c3e50;">Quick
+                                Facts</h2>
+
+                            <!-- Fact Item 1 -->
+                            <div style="display: flex; align-items: flex-start; margin-bottom: 16px;">
+                                <div
+                                    style="width: 36px; height: 36px; border-radius: 8px; background-color: rgba(52, 152, 219, 0.1); display: flex; align-items: center; justify-content: center; margin-right: 16px; flex-shrink: 0;">
+                                    <i class="fas fa-map-marker-alt" style="color: #3498db; font-size: 14px;"></i>
+                                </div>
+                                <div style="display: flex; flex-direction: column;">
+                                    <span
+                                        style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #3498db; letter-spacing: 0.5px; margin-bottom: 4px;">Location</span>
+                                    <span style="font-size: 0.95rem; color: #555; font-weight: 500;">Pathankot,
+                                        Punjab</span>
+                                </div>
+                            </div>
+
+                            <hr style="border: none; border-top: 1px solid #eee; margin: 16px 0;">
+
+                            <!-- Fact Item 2 -->
+                            <div style="display: flex; align-items: flex-start; margin-bottom: 16px;">
+                                <div
+                                    style="width: 36px; height: 36px; border-radius: 8px; background-color: rgba(52, 152, 219, 0.1); display: flex; align-items: center; justify-content: center; margin-right: 16px; flex-shrink: 0;">
+                                    <i class="fas fa-graduation-cap" style="color: #3498db; font-size: 14px;"></i>
+                                </div>
+                                <div style="display: flex; flex-direction: column;">
+                                    <span
+                                        style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #3498db; letter-spacing: 0.5px; margin-bottom: 4px;">Education</span>
+                                    <span style="font-size: 0.95rem; color: #555; font-weight: 500;">B.Tech in
+                                        CSE</span>
+                                </div>
+                            </div>
+
+                            <hr style="border: none; border-top: 1px solid #eee; margin: 16px 0;">
+
+                            <!-- Fact Item 3 -->
+                            <div style="display: flex; align-items: flex-start;">
+                                <div
+                                    style="width: 36px; height: 36px; border-radius: 8px; background-color: rgba(52, 152, 219, 0.1); display: flex; align-items: center; justify-content: center; margin-right: 16px; flex-shrink: 0;">
+                                    <i class="fas fa-university" style="color: #3498db; font-size: 14px;"></i>
+                                </div>
+                                <div style="display: flex; flex-direction: column;">
+                                    <span
+                                        style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #3498db; letter-spacing: 0.5px; margin-bottom: 4px;">University</span>
+                                    <span style="font-size: 0.95rem; color: #555; font-weight: 500;">Lovely Professional
+                                        University</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Interests Card -->
+                        <div
+                            style="background-color: white; border-radius: 10px; padding: 24px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                            <h2 style="font-size: 1.2rem; font-weight: 700; margin: 0 0 24px 0; color: #2c3e50;">
+                                Interests</h2>
+
+                            <!-- Interest Item 1 -->
+                            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                                <div
+                                    style="width: 36px; height: 36px; border-radius: 8px; background-color: rgba(52, 152, 219, 0.1); display: flex; align-items: center; justify-content: center; margin-right: 16px; flex-shrink: 0;">
+                                    <i class="fas fa-chart-line" style="color: #3498db; font-size: 14px;"></i>
+                                </div>
+                                <span style="font-size: 0.95rem; font-weight: 600; color: #555;">Data Analysis</span>
+                            </div>
+
+                            <!-- Interest Item 2 -->
+                            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                                <div
+                                    style="width: 36px; height: 36px; border-radius: 8px; background-color: rgba(52, 152, 219, 0.1); display: flex; align-items: center; justify-content: center; margin-right: 16px; flex-shrink: 0;">
+                                    <i class="fa-solid fa-brain" style="color: #3498db; font-size: 14px;"></i>
+                                </div>
+                                <span style="font-size: 0.95rem; font-weight: 600; color: #555;">Machine Learning</span>
+                            </div>
+
+                            <!-- Interest Item 3 -->
+                            <div style="display: flex; align-items: center;">
+                                <div
+                                    style="width: 36px; height: 36px; border-radius: 8px; background-color: rgba(52, 152, 219, 0.1); display: flex; align-items: center; justify-content: center; margin-right: 16px; flex-shrink: 0;">
+                                    <i class="fa-solid fa-mobile-alt" style="color: #3498db; font-size: 14px;"></i>
+                                </div>
+                                <span style="font-size: 0.95rem; font-weight: 600; color: #555;">Android
+                                    Development</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Right Column -->
+                    <div style="flex: 2 1 450px; display: flex; flex-direction: column; gap: 24px;">
+
+                        <!-- My Journey Card -->
+                        <div
+                            style="background-color: white; border-radius: 10px; padding: 32px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                            <h2 style="font-size: 1.3rem; font-weight: 700; margin: 0 0 20px 0; color: #2c3e50;">My
+                                Journey</h2>
+
+                            <p style="font-size: 1rem; color: #555; line-height: 1.7; margin: 0 0 16px 0;">
+                                Hey! I am<span style="color: #3498db; font-weight: 600;">
+                                    Prabhjot Singh</span>, a developer who loves creating simple solutions for complex
+                                problems.
+                                <br>
+                                My journey as a Data Science student began with curiosity about how data shapes
+                                decisions in the real world. With a background in computer science, I developed skills
+                                in Python, statistics, and data analysis. I enjoy discovering patterns in data and
+                                solving real-life problems using logical thinking. Challenges in coding and concepts
+                                helped me grow stronger and more confident. Inspired by the mindset of top universities
+                                like Harvard, I aim to continuously learn, innovate, and use data responsibly to create
+                                meaningful impact in technology, business, and society.
+
+                            </p>
+
+
+                        </div>
+
+                        <!-- My Approach Card -->
+                        <div
+                            style="background-color: white; border-radius: 10px; padding: 32px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                            <h2 style="font-size: 1.3rem; font-weight: 700; margin: 0 0 20px 0; color: #2c3e50;">My
+                                Approach</h2>
+
+                            <p style="font-size: 1rem; color: #555; line-height: 1.7; margin: 0;">
+                                My approach to Data Science is based on curiosity, logic, and continuous learning. I
+                                believe in understanding problems deeply before applying technical solutions. I focus on
+                                building strong fundamentals in Python, statistics, and data analysis while improving my
+                                problem-solving mindset. I prefer learning by doing, working on real datasets, and
+                                experimenting with different techniques to discover insights. I aim to combine technical
+                                skills with critical thinking to create meaningful and ethical solutions. My goal is not
+                                only to analyze data but to transform it into knowledge that helps organizations make
+                                smarter decisions.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Bachelor of Technology - CSE</h3>
+                        <h4>Lovely Professional University, Phagwara</h4>
+                        <span class="timeline-date">Aug'23 - Present</span>
+                        <p>CGPA: 6.6</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Intermediate</h3>
+                        <h4>Christ The King Convent School, Pathankot</h4>
+                        <span class="timeline-date">Apr'20 - Mar'21</span>
+                        <p>Percentage: 80%</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Matriculation</h3>
+                        <h4>Government Senior Secondary School, Pathankot</h4>
+                        <span class="timeline-date">Apr'22 - Mar'23</span>
+                        <p>Percentage: 82%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>Technical</h4>
+                    <div class="skills">
+                        <span class="skill-tag">C++</span><span class="skill-tag">Python</span><span
+                            class="skill-tag">Java</span><span class="skill-tag">SQL</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>Frameworks</h4>
+                    <div class="skills">
+                        <span class="skill-tag">Scikit-Learn</span><span class="skill-tag">NumPy</span><span
+                            class="skill-tag">Pandas</span><span class="skill-tag">Matplotlib</span><span
+                            class="skill-tag">Seaborn</span><span class="skill-tag">Plotly</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>Tools & Platforms</h4>
+                    <div class="skills">
+                        <span class="skill-tag">Git</span><span class="skill-tag">GitHub</span><span
+                            class="skill-tag">VS Code</span><span class="skill-tag">PostgreSQL</span><span
+                            class="skill-tag">MS Excel</span><span class="skill-tag">Power BI</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>Soft Skills</h4>
+                    <div class="skills">
+                        <span class="skill-tag">Problem-Solving</span><span class="skill-tag">Communication</span><span
+                            class="skill-tag">Team Collaboration</span><span class="skill-tag">Time
+                            Management</span><span class="skill-tag">Adaptable</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-car-side"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Electrical Vehicle Population</h3>
+                        <span class="project-date"
+                            style="color: #7f8c8d; font-size: 0.9rem; margin-bottom: 1rem; display: block;">Jan' 25 -
+                            Feb' 25</span>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span><span class="tech-tag">NumPy</span><span
+                                class="tech-tag">Pandas</span><span class="tech-tag">Seaborn</span><span
+                                class="tech-tag">Matplotlib</span><span class="tech-tag">Excel</span>
+                        </div>
+                        <ul>
+                            <li>Executed data cleaning and EDA to analyze EV adoption trends across states, vehicle
+                                types and model years.</li>
+                            <li>Conducted statistical analysis and correlation studies to uncover factors influencing EV
+                                growth and regional distribution.</li>
+                            <li>Generated visualizations and Excel dashboards to highlight trends in EV popularity,
+                                charging infrastructure and market insights.</li><br>
+                            <a href="https://github.com/Prabhjot0770" target="_blank"
+                                style="display:inline-block;background:#667eea;color:white;padding:12px 25px;border-radius:30px;text-decoration:none;font-size:18px;box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2); width: max-content;">GitHub</a>
+                        </ul>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Customer Churn Analysis</h3>
+                        <span class="project-date"
+                            style="color: #7f8c8d; font-size: 0.9rem; margin-bottom: 1rem; display: block;">Feb' 25 -
+                            Mar' 25</span>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span><span class="tech-tag">Pandas</span><span
+                                class="tech-tag">NumPy</span><span class="tech-tag">Matplotlib</span><span
+                                class="tech-tag">Seaborn</span><span class="tech-tag">Scikit-learn</span>
+                        </div>
+                        <ul>
+                            <li>Performed Exploratory Data Analysis (EDA) on bank customer data to understand factors
+                                contributing to churn.</li>
+                            <li>Analysed churn patterns by geography, age, tenure, credit score, balance, and estimated
+                                salary.</li>
+                            <li>Created visual insight using Matplotlib and Seaborn to identify high-risk customer
+                                segments.</li>
+                            <li>Applied data preprocessing and statistical techniques to uncover correlations and
+                                patterns influencing customer attrition.</li>
+                            <li>Provided insights that support data-driven strategies for reducing churn.</li><br>
+                            <a href="https://github.com/Prabhjot0770/EDA-" target="_blank"
+                                style="display:inline-block;background:#667eea;color:white;padding:12px 25px;border-radius:30px;text-decoration:none;font-size:18px;box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2); width: max-content;">GitHub</a>
+                        </ul>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fab fa-android"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Android Developer Pro: Hands-On Project</h3>
+                        <span class="project-date"
+                            style="color: #7f8c8d; font-size: 0.9rem; margin-bottom: 1rem; display: block;">Jun' 25 –
+                            Aug' 25</span>
+                        <div class="project-tech">
+                            <span class="tech-tag">Kotlin</span><span class="tech-tag">Android Studio</span><span
+                                class="tech-tag">XML</span><span class="tech-tag">Git/GitHub</span>
+                        </div>
+                        <ul>
+                            <li>Built Android apps using Kotlin with hands-on practice in UI design, navigation, and
+                                core components.</li>
+                            <li>Implemented features like RecyclerView, Intents, data storage, and app permissions.</li>
+                            <li>Completed real-world projects and learned Play Store deployment basics.</li><br>
+                            <a href="https://github.com/Prabhjot0770" target="_blank"
+                                style="display:inline-block;background:#667eea;color:white;padding:12px 25px;border-radius:30px;text-decoration:none;font-size:18px;box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2); width: max-content;">GitHub</a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certifications">
+        <div class="container">
+            <h2 class="section-title">Licenses & Certifications</h2>
+            <div class="cert-grid">
+                <a href="IBM.png" style="text-decoration: none;">
+                    <div class="cert-card">
+                        <i class="fas fa-certificate cert-icon"></i>
+                        <div class="cert-info">
+                            <h3>Introduction to Hardware and Operating Systems</h3>
+                            <p>Coursera</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="Bits.png" style="text-decoration: none;">
+                    <div class="cert-card">
+                        <i class="fas fa-network-wired cert-icon"></i>
+                        <div class="cert-info">
+                            <h3>The Bits and Bytes of Computer Networking</h3>
+                            <p>Coursera</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="ADP.png" style="text-decoration: none;">
+                    <div class="cert-card">
+                        <i class="fab fa-android cert-icon" style="color:#3498db;"></i>
+                        <div class="cert-info" style="padding-bottom: 28px;">
+                            <h3>Android Developer Pro</h3>
+                            <p>LPU</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="BUILD.png" style="text-decoration: none;">
+                    <div class="cert-card">
+                        <i class="fas fa-robot cert-icon"></i>
+                        <div class="cert-info">
+                            <h3>Build Generative AI Apps and Solutions</h3>
+                            <p>Infosys Springboard</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="Master.png" style="text-decoration: none;">
+                    <div class="cert-card">
+                        <i class="fas fa-brain cert-icon"></i>
+                        <div class="cert-info">
+                            <h3>Master Generative AI & Generative AI tools</h3>
+                            <p>Infosys Springboard</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-wrap">
+                <div class="contact-info">
+                    <p>I'm always open to discussing new projects, creative ideas or opportunities to be part of your
+                        visions!</p>
+                    <div class="contact-links">
+                        <a href="mailto:prabhjot.29560770@gmail.com" class="contact-link">
+                            <i class="fas fa-envelope"></i> prabhjot.29560770@gmail.com
+                        </a>
+                        <a href="tel:+919646566990" class="contact-link">
+                            <i class="fas fa-phone"></i> +91 - 9646566990
+                        </a>
+                        <a href="https://linkedin.com/in/prabhjotsinghhh" class="contact-link" target="_blank">
+                            <i class="fab fa-linkedin"></i> LinkedIn Profile
+                        </a>
+                        <a href="https://github.com/Prabhjot0770" class="contact-link" target="_blank">
+                            <i class="fab fa-github"></i> GitHub Profile
+                        </a>
+                    </div>
+                </div>
+                <form id="contactForm" class="contact-form">
+                    <h3>Send a Message</h3>
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea rows="5" placeholder="Your Message" required></textarea>
+                    <button type="submit" id="submitBtn">Submit Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Prabhjot Singh. All rights reserved. | Made with ❤️</p>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card, .section-title, .skill-category, .timeline-item, .cert-card, .contact-info, .contact-form').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Contact Form Submission Handling
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function (e) {
+                e.preventDefault(); // Prevent actual form submission and API call
+
+                const submitBtn = document.getElementById('submitBtn');
+                submitBtn.innerText = 'Sending...';
+                submitBtn.disabled = true;
+                submitBtn.style.opacity = '0.7';
+                submitBtn.style.cursor = 'not-allowed';
+
+                // Simulate an API network request before redirecting
+                setTimeout(() => {
+                    window.location.href = 'success.html';
+                }, 1200);
+            });
+        }
+    </script>
+</body>
+
+</html>
